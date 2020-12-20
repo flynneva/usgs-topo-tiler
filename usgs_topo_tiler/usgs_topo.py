@@ -69,11 +69,10 @@ def tile(
             map_bounds = estimate_extent(image_wgs_bounds, address)
         cutline = get_cutline(src_dst, map_bounds)
 
-        return reader.tile(
-            src_dst,
-            tile_x,
-            tile_y,
-            tile_z,
-            tilesize,
-            warp_vrt_option={'cutline': cutline},
+        return reader.part(
+            src_dst=src_dst,
+            bounds=map_bounds,
+            width=tile_x,
+            height=tile_y,
+            vrt_options={'cutline': cutline},
             **kwargs)
